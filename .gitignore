@@ -1,0 +1,40 @@
+# Secrets and credentials - NEVER commit these
+.netrc
+.nixnetrc
+.wakatime.cfg
+.ssh/
+.aws/
+.kube/
+.docker/
+.gnupg/
+.doppler/
+.tsh/
+.copilot/
+
+# API keys and tokens
+*.pem
+*.key
+*kubeconfig*
+*secret*
+
+# Shell history
+.bash_history
+.zsh_history
+.zsh_history_bad
+.lesshst
+.viminfo
+.wget-hsts
+
+# Cache and generated files
+.cache/
+.local/
+.zcompdump*
+
+# Editor/IDE state
+.vscode-server/
+.cursor/
+.cursor-server/
+
+# OS files
+.Xauthority
+.sudo_as_admin_successful

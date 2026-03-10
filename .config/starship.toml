@@ -1,0 +1,194 @@
+add_newline = true
+format = """
+$status \
+$username\
+$hostname \
+${custom.date}\
+$kubernetes\
+$directory\
+$all\
+\n\
+$character
+"""
+
+[kubernetes]
+format = "\n[☸\uFE0E $cluster:$namespace](blue) "
+disabled = false
+
+[custom.date]
+command = 'date "+%Y/%m/%d %H:%M:%S"'
+when = "true"
+
+
+[git_metrics]
+disabled = false
+[git_branch]
+disabled = false
+[git_commit]
+disabled = false
+[git_state]
+disabled = false
+[git_status]
+disabled = false
+
+[username]
+style_user = "white"
+style_root = "red bold"
+format = "[$user]($style)[@](blue bold)"
+disabled = false
+
+[directory]
+format = "\n[> $path]($style) [$read_only]($read_only_style)"
+truncation_length = 0
+disabled = false
+
+# \uFE0E forces character to display as unicode glyph not emoji
+# read_only = "🔒\uFE0E"
+
+[status]
+symbol = ''
+success_symbol = '0'
+format = '$symbol$hex_status'
+map_symbol = false
+disabled = false
+
+[time]
+disabled = true
+
+[hostname]
+ssh_only = false
+format =  "[$hostname](green)"
+disabled = false
+
+[character]
+success_symbol = "[\\$](green) "
+error_symbol = "[\\$](red) "
+vicmd_symbol = "[\\%](green) "
+
+
+[aws]
+disabled = true
+[azure]
+disabled = true
+[battery]
+disabled = true
+[buf]
+disabled = true
+[bun]
+disabled = true
+[c]
+disabled = true
+[cmake]
+disabled = true
+[cmd_duration]
+disabled = true
+[cobol]
+disabled = true
+[conda]
+disabled = true
+[container]
+disabled = true
+[crystal]
+disabled = true
+[daml]
+disabled = true
+[dart]
+disabled = true
+[deno]
+disabled = true
+[docker_context]
+disabled = true
+[dotnet]
+disabled = true
+[elixir]
+disabled = true
+[elm]
+disabled = true
+[env_var]
+disabled = true
+[erlang]
+disabled = true
+[fill]
+disabled = true
+[gcloud]
+disabled = true
+[golang]
+disabled = true
+[haskell]
+disabled = true
+[helm]
+disabled = true
+[hg_branch]
+disabled = true
+[java]
+disabled = true
+[jobs]
+disabled = true
+[julia]
+disabled = true
+[kotlin]
+disabled = true
+[line_break]
+disabled = true
+[localip]
+disabled = true
+[lua]
+disabled = true
+[memory_usage]
+disabled = true
+[nim]
+disabled = true
+[nix_shell]
+disabled = true
+[nodejs]
+disabled = true
+[ocaml]
+disabled = true
+[openstack]
+disabled = true
+[package]
+disabled = true
+[perl]
+disabled = true
+[php]
+disabled = true
+[pulumi]
+disabled = true
+[purescript]
+disabled = true
+[python]
+disabled = true
+[raku]
+disabled = true
+[red]
+disabled = true
+[rlang]
+disabled = true
+[ruby]
+disabled = true
+[rust]
+disabled = true
+[scala]
+disabled = true
+[shell]
+disabled = true
+[shlvl]
+disabled = true
+[singularity]
+disabled = true
+[spack]
+disabled = true
+[sudo]
+disabled = true
+[swift]
+disabled = true
+[terraform]
+disabled = true
+[vagrant]
+disabled = true
+[vcsh]
+disabled = true
+[vlang]
+disabled = true
+[zig]
+disabled = true

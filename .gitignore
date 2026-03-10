@@ -38,3 +38,4 @@
 # OS files
 .Xauthority
 .sudo_as_admin_successful
+Brewfile.lock.json

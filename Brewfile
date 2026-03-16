@@ -1,6 +1,5 @@
 # Taps
 tap "bufbuild/buf"
-tap "derailed/k9s"
 tap "tilt-dev/tap"
 
 # Core tools
@@ -20,7 +19,7 @@ brew "kubectl"
 brew "kustomize"
 brew "kind"
 brew "kompose"
-brew "derailed/k9s/k9s"
+brew "k9s"
 brew "socat"
 brew "tilt"
 brew "tilt-dev/tap/ctlptl"

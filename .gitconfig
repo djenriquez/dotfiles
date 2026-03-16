@@ -1,8 +1,6 @@
 [user]
 	name = DJ Enriquez
 	email = denrie.enriquezjr@gmail.com
-[url "git@github.com:"]
-	insteadOf = https://github.com/
 [init]
 	defaultBranch = main
 [credential "https://github.com"]

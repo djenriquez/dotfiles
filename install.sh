@@ -84,6 +84,52 @@ link_dotfiles() {
   mkdir -p "$HOME/.config/atuin"
   link_file "$DOTFILES_DIR/.config/starship.toml" "$HOME/.config/starship.toml"
   link_file "$DOTFILES_DIR/.config/atuin/config.toml" "$HOME/.config/atuin/config.toml"
+
+  # Claude Code config
+  setup_claude_config
+}
+
+setup_claude_config() {
+  info "Setting up Claude Code config..."
+
+  mkdir -p "$HOME/.claude/commands" "$HOME/.claude/agents"
+
+  # settings.json needs PATH templated from current shell environment
+  if [ -f "$DOTFILES_DIR/.claude/settings.json" ]; then
+    local current_path
+    current_path="$HOME/go/bin:$HOME/.atuin/bin:/home/linuxbrew/.linuxbrew/opt/go@1.23/bin:$HOME/.asdf/bin:/usr/local/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:$HOME/.local/bin:$HOME/.krew/bin"
+    sed "s|__PATH__|${current_path}|g" "$DOTFILES_DIR/.claude/settings.json" > "$HOME/.claude/settings.json"
+    info "Wrote settings.json with resolved PATH"
+  fi
+
+  # Symlink commands and agents (these are safe to link directly)
+  for f in "$DOTFILES_DIR/.claude/commands/"*.md; do
+    [ -f "$f" ] && link_file "$f" "$HOME/.claude/commands/$(basename "$f")"
+  done
+
+  for f in "$DOTFILES_DIR/.claude/agents/"*.md; do
+    [ -f "$f" ] && link_file "$f" "$HOME/.claude/agents/$(basename "$f")"
+  done
+
+  # Merge MCP server definitions into ~/.claude.json (creates file if missing)
+  if [ -f "$DOTFILES_DIR/.claude/mcp-servers.json" ] && has jq; then
+    local claude_json="$HOME/.claude.json"
+    local mcp_template="$DOTFILES_DIR/.claude/mcp-servers.json"
+
+    if [ -f "$claude_json" ]; then
+      # Merge MCP servers into existing file (preserves all other keys)
+      local tmp
+      tmp=$(mktemp)
+      jq --slurpfile mcp "$mcp_template" '.mcpServers = (.mcpServers // {}) * $mcp[0]' "$claude_json" > "$tmp" && mv "$tmp" "$claude_json"
+      info "Merged MCP server definitions into ~/.claude.json"
+    else
+      # Create minimal ~/.claude.json with just MCP servers
+      jq -n --slurpfile mcp "$mcp_template" '{mcpServers: $mcp[0]}' > "$claude_json"
+      info "Created ~/.claude.json with MCP server definitions"
+    fi
+  elif ! has jq; then
+    warn "jq not found, skipping MCP server setup (install jq and re-run)"
+  fi
 }
 
 # --- Main ---
@@ -115,6 +161,8 @@ main() {
   info "  1. Restart your shell or run: exec zsh"
   info "  2. Run 'gh auth login' to set up GitHub credentials"
   info "  3. Run 'atuin register' or 'atuin login' for shell history sync"
+  info "  4. Claude Code: MCP servers will re-authenticate on first use (OAuth)"
+  info "     Plugins will need to be re-installed via 'claude plugins install'"
 }
 
 main "$@"

@@ -5,6 +5,7 @@ tap "tilt-dev/tap"
 # Core tools
 brew "curl"
 brew "git"
+brew "jq"
 brew "ripgrep"
 brew "fzf"
 brew "eza"

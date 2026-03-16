@@ -25,6 +25,32 @@
 .viminfo
 .wget-hsts
 
+# Claude Code - credentials, runtime state, and company-specific agents
+.claude/.credentials.json
+.claude/agents/
+.claude/history.jsonl
+.claude/stats-cache.json
+.claude/policy-limits.json
+.claude/projects/
+.claude/session-env/
+.claude/agent-memory/
+.claude/plugins/
+.claude/cache/
+.claude/debug/
+.claude/file-history/
+.claude/paste-cache/
+.claude/plans/
+.claude/todos/
+.claude/tasks/
+.claude/teams/
+.claude/telemetry/
+.claude/statsig/
+.claude/backups/
+.claude/ide/
+.claude/shell-snapshots/
+.claude/skills/
+.claude/commands~/
+
 # Cache and generated files
 .cache/
 .local/

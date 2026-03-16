@@ -1,0 +1,24 @@
+{
+  "codex": {
+    "type": "stdio",
+    "command": "codex",
+    "args": ["mcp-server"],
+    "env": {}
+  },
+  "glean_default": {
+    "type": "http",
+    "url": "https://coreweave-be.glean.com/mcp/default"
+  },
+  "atlassian": {
+    "type": "http",
+    "url": "https://mcp.atlassian.com/v1/mcp"
+  },
+  "sourcegraph": {
+    "type": "http",
+    "url": "https://coreweave.sourcegraphcloud.com/.api/mcp/v1"
+  },
+  "github": {
+    "type": "http",
+    "url": "https://api.githubcopilot.com/mcp"
+  }
+}
